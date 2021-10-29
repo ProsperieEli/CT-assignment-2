@@ -20,4 +20,15 @@ describe('test', () => {
       .then((actualSecret) => expect(actualSecret).toEqual(file));
   });
 
+  it('get all', () => {
+    const saving = new SimpleDb(rootDir);
+    const file1 = { hello: 'world' };
+    const file2 = { goodbye: 'world' };
+
+    return saving
+      .save(file1)
+      .then(() => saving.save(file2))
+      .then(() => saving.getAll())
+      .then((files) => expect(files).toEqual([file1, file2]));
+  });
 });
